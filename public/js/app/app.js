@@ -42,7 +42,65 @@ gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
         street: 'Prenzlauer Allee 219',
         location: [13.393530, 52.513480]
       }
+    },
+    {
+      name: "Power Primeln",
+      manager: "Alexander Hansen",
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      price: {
+        name: 'Best of Summer Competition',
+        icon: 'batch',
+        place: '1'
+      },
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.513480]
+      }
+    },
+    {
+      name: "Power Primeln",
+      manager: "Alexander Hansen",
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      price: {
+        name: 'Best of Summer Competition',
+        icon: 'batch',
+        place: '1'
+      },
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.513480]
+      }
+    },
+    {
+      name: "Power Primeln",
+      manager: "Alexander Hansen",
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      price: {
+        name: 'Best of Summer Competition',
+        icon: 'batch',
+        place: '1'
+      },
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.513480]
+      }
     }
+
   ];
 
   $scope.manuelsMerchantId = "RALBAY2LYDHSS";
