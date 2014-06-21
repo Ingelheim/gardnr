@@ -16,7 +16,7 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
-gardnrApp.controller('MapCtrl', ['$scope', '$http', function ($scope, $http) {
+gardnrApp.controller('MapCtrl', ['$scope', 'brainTreeService', function ($scope, brainTreeService) {
 
   $scope.startingLocation = {
     lat: 52.513480,
@@ -82,41 +82,8 @@ gardnrApp.controller('MapCtrl', ['$scope', '$http', function ($scope, $http) {
     }
   ];
 
-  $scope.payment = function(amount) {
-    console.log('payment: ', amount);
-    $http.get('/payment/' + amount)
-    .success(function() {
-      console.log('success')
-    })
-    .error(function(err) {
-      console.log(err)
-    });
-  };
+  $scope.payment = brainTreeService.payment;
 
-  $scope.register = function() {
-    console.log('registering');
-
-    var individual = {
-      firstName: "Jane",
-      lastName: "Doe",
-      email: "jane@14ladders.com",
-      phone: "5553334444",
-      dateOfBirth: "1981-11-19",
-      address: {
-        streetAddress: "111 Main St",
-        locality: "Chicago",
-        region: "IL",
-        postalCode: "60622"
-      }
-    };
-    $http.post('/registerSubMerchant', individual)
-    .success(function() {
-      console.log('successfully registered')
-    })
-    .error(function(err) {
-      console.log(err)
-    });
-
-  }
+  $scope.register = brainTreeService.register;
 
 }]);
