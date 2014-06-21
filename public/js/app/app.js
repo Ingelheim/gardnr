@@ -25,7 +25,6 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
     .otherwise('/map');
 }]);
 
-
 gardnrApp.controller('MapCtrl', [
   '$rootScope',
   '$scope',
@@ -130,15 +129,8 @@ gardnrApp.controller('MapCtrl', [
     }
   ];
 
-  $scope.payment = function(amount) {
-    console.log('payment: ', amount);
-    $http.get('/payment/' + amount)
-    .success(function() {
-      console.log('success')
-    })
-    .error(function(err) {
-      console.log(err)
-    });
-  };
+  $scope.payment = brainTreeService.payment;
+
+  $scope.register = brainTreeService.register;
 
 }]);
