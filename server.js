@@ -10,11 +10,10 @@ var db = MongoClient.connect('mongodb://gardnr:gardnrApp123@ds048487.mongolab.co
 });
 
 app.use(express.static(__dirname + '/public'));
-
-app.set('view engine', 'jade');
+app.engine('html', require('ejs').renderFile);
 
 app.get('/', function (req, res) {
-  res.render('index');
+  res.render('index.html');
 });
 
 
