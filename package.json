@@ -1,7 +1,7 @@
 {
-  "name": "hackathon-solarcalc",
+  "name": "gardnr",
   "version": "0.0.1",
-  "description": "Startupbootcamp Hackathon 2014 App",
+  "description": "Battlehack 2014 Berlin App",
   "main": "server.js",
   "author": "TBD",
   "scripts": {
@@ -11,6 +11,7 @@
     "express": "4.4.1",
     "underscore": "1.6.0",
     "ejs": "~1.0.0",
-    "paypal-rest-sdk": "^0.9.2"
+    "paypal-rest-sdk": "^0.9.2",
+    "azure": "0.9.9"
   }
 }
