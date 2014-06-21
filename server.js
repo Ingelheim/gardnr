@@ -1,8 +1,13 @@
 var express = require('express'),
-    app = express(),
-    http = require('http').Server(app),
-    mongoose = require("mongoose"),
-    database = require('./db/dbConnection');
+  app = express(),
+  http = require('http').Server(app),
+  MongoClient = require('mongodb').MongoClient,
+  format = require('util').format;
+
+var db = MongoClient.connect('mongodb://gardnr:gardnrApp123@ds048487.mongolab.com:48487/gardnr', function (err, db) {
+  if (err) throw err;
+  return db;
+});
 
 app.use(express.static(__dirname + '/public'));
 
