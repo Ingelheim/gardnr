@@ -38,6 +38,12 @@
 .garden-item {
   height: 100px;
 }
+.login {
+  margin-top: 200px;
+}
+.login input {
+  margin-bottom: 5px;
+}
 body {
   overflow-y: scroll;
   font-family: 'Open Sans', sans-serif;

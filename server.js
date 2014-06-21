@@ -33,6 +33,14 @@ app.get('/', function (req, res) {
   res.render('index.html');
 });
 
+app.get('/login', function (req, res) {
+  res.render('login.html');
+});
+
+app.get('/register', function (req, res) {
+  res.render('register.html');
+});
+
 app.get('/payment/:amount', function(req, res) {
   console.log(req.params.amount);
   braintreeGateWay.transaction.sale({
