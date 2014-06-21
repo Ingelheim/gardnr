@@ -3,7 +3,9 @@
 var gardnrApp = angular.module('gardnr-app', [
   'ngRoute',
   'ngResource',
-  'geo'
+  'geo',
+  'profile',
+  'garden'
 ]);
 
 gardnrApp.config(['$routeProvider', function($routeProvider) {
@@ -12,11 +14,32 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: '/views/MapView.html',
       controller: 'MapCtrl'
     })
+    .when('/profile/:userSlug', {
+      templateUrl: '/views/UserView.html',
+      controller: 'UserCtrl'
+    })
+    .when('/garden/new', {
+      templateUrl: '/views/NewGardenView.html',
+      controller: 'NewGardenCtrl'
+    })
     .otherwise('/map');
 }]);
 
 
-gardnrApp.controller('MapCtrl', ['$scope', 'PaypalService', function ($scope, PaypalService) {
+gardnrApp.controller('MapCtrl', [
+  '$rootScope',
+  '$scope',
+  '$http',
+  '$route',
+  '$location',
+  'GeocodeService',
+  'LocationPickService',
+  function ($rootScope, $scope, $http, $route, $location, GeocodeService, LocationPickService) {
+
+  $scope.locationPick = {
+    enabled: $route.current.params.pickloc,
+    location: []
+  }
 
   $scope.startingLocation = {
     lat: 52.513480,
@@ -28,6 +51,31 @@ gardnrApp.controller('MapCtrl', ['$scope', 'PaypalService', function ($scope, Pa
     lastname: 'Berg',
     street: 'Alexanderstr. 3'
   }
+
+  $rootScope.$on('locationPicked', function(event, data){
+    GeocodeService.getAddress(data[0], data[1], function(error, address){
+      if(error){
+        console.log(error);
+      } else {
+        var street = address.results[0].address_components[1].long_name + ' ' + address.results[0].address_components[0].long_name;
+        var city = "Berlin";
+        var postal = "10405";
+
+        for(var i = 0, len = address.results[0].address_components.length; i < len; i++){
+          if(address.results[0].address_components[i].types[0] == 'locality'){
+            city = address.results[0].address_components[i].long_name;
+          }
+
+          if(address.results[0].address_components[i].types[0] == 'postal_code'){
+            postal = address.results[0].address_components[i].long_name;
+          }
+        }
+
+        LocationPickService.setAddress(street, postal, city);
+        $location.path('/garden/new');
+      }
+    });
+  }, true);
 
 
   $scope.gardens = [
@@ -82,38 +130,86 @@ gardnrApp.controller('MapCtrl', ['$scope', 'PaypalService', function ($scope, Pa
     }
   ];
 
-  $scope.payment = function() {
-    console.log('payment');
-    PaypalService.payment();
-  };
-
-}]);
-
-'use strict';
-
-angular.module('gardnr-app').service('PaypalService', ['$http', function($http) {
-  
-  var service = {};
-
-  // paypalSdk.configure({
-  //   'mode': 'sandbox', //sandbox or live
-  //   'client_id': 'AcrWFxD--quh-W6KNpcNlK97j7649oz9bq2A2-9tljWr8dxAwri7V_-f54RL',
-  //   'client_secret': 'ECdNXhBr7DSycztxUe_IYqcxPKRF4h5U-feTW0YmQ2gOSizFNIxlDFzElrJV'
-  // });
-
-  service.payment = function () {
-    $http.get('/payment')
+  $scope.payment = function(amount) {
+    console.log('payment: ', amount);
+    $http.get('/payment/' + amount)
     .success(function() {
       console.log('success')
     })
     .error(function(err) {
       console.log(err)
-    })
+    });
   };
 
-  return service;
-
 }]);
+
+/**
+ * Author: Thomas Schiela
+ * Date: 21.06.2014
+ * Time: 23:05
+ */
+
+var garden = angular.module('garden', [
+]);
+
+
+garden.controller('NewGardenCtrl', [
+  '$scope',
+  '$location',
+  'LocationPickService',
+  function ($scope, $location, LocationPickService) {
+  $scope.garden = {
+    address: null
+  }
+
+  $scope.steps = [
+    {
+      completed: false
+    },
+    {
+      completed: false
+    },
+    {
+      completed: false
+    }
+  ];
+
+  $scope.pickedLocation = LocationPickService.getAddress();
+
+  if($scope.pickedLocation.city){
+    $scope.garden.address = $scope.pickedLocation;
+  }
+
+
+
+
+  $scope.pickLocation = function(){
+    $location
+      .path('map')
+      .search('pickloc');
+  }
+}]);
+
+garden.factory('LocationPickService', function () {
+  var _street;
+  var _postal;
+  var _city;
+
+  return {
+    setAddress: function (street, postal, city) {
+      _street = street;
+      _postal = postal;
+      _city = city;
+    },
+    getAddress: function(){
+      return {
+        street: _street,
+        postal: _postal,
+        city: _city
+      }
+    }
+  }
+});
 
 /**
  * Author: Thomas Schiela <thomas.schiel@gmail.com>
@@ -151,6 +247,15 @@ angular.module('geo', [])
           } else {
             callback({error: 'do not support geolocation'});
           }
+        },
+        getAddress: function(lat, lng, callback){
+            $http({method: 'GET', url: '//maps.googleapis.com/maps/api/geocode/json?latlng='+lng+','+lat+'&sensor=true_or_false'}).
+              success(function (data, status, headers, config) {
+                callback(null, data)
+              }).
+              error(function (data, status, headers, config) {
+                callback(data);
+              });
         }
       }
     })
@@ -182,13 +287,14 @@ angular.module('geo', [])
         }
       };
     })
-    .directive('gmap', function($timeout){
+    .directive('gmap', function($timeout, $rootScope){
       return {
         restrict: 'A',
         scope: {
           gmap: '=',
           markers: '=',
-          imagePath: '='
+          imagePath: '=',
+          locationPick: '='
         },
         link: function ($scope, $element, $attributes) {
           var options = {
@@ -279,6 +385,10 @@ angular.module('geo', [])
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               maxZoom: 18
             };
+
+            if($scope.locationPick && $scope.locationPick.enabled){
+              mapOptions.draggableCursor = 'crosshair';
+            }
 
             map = new google.maps.Map(document.getElementById(options.mapContainerId), mapOptions);
           }
@@ -387,7 +497,30 @@ angular.module('geo', [])
             infoBoxEventListeners = [];
             markers = [];
           }
+
+          if($scope.locationPick && $scope.locationPick.enabled){
+            google.maps.event.addListener(map, 'click', function(event) {
+              console.log(event.latLng);
+              $rootScope.$emit('locationPicked', [event.latLng.A, event.latLng.k]);
+            });
+          }
         }
       }
     })
 ;
+
+/**
+ * Author: Thomas Schiela
+ * Date: 21.06.2014
+ * Time: 23:05
+ */
+
+var profile = angular.module('profile', [
+]);
+
+
+profile.controller('UserCtrl', ['$scope', function ($scope) {
+
+
+
+}]);

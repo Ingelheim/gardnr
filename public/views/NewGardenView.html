@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row big-btns">
+    <div class="col-xs-4">
+      <button class="btn btn-white btn-block" type="button" ng-click="pickLocation()" ng-disabled="garden.address != null">
+        <i class="fa fa-map-marker fa-2x"></i><br>
+        <span ng-hide="garden.address != null">Add Location</span>
+        <span ng-show="garden.address != null">
+          <br>
+          {{garden.address.street}}<br>
+          {{garden.address.postal}}<br>
+          {{garden.address.city}}
+        </span>
+      </button>
+    </div>
+    <div class="col-xs-4">
+      <button class="btn btn-white btn-block" type="button" ng-disabled="garden.address == null">
+        <i class="fa fa-photo fa-2x"></i><br>
+        Upload Photo
+      </button>
+    </div>
+    <div class="col-xs-4">
+      <button class="btn btn-white btn-block" type="button" ng-disabled="garden.address == null">
+        <i class="fa fa-envelope fa-2x"></i><br>
+        Write a message
+      </button>
+    </div>
+  </div>
+</div>

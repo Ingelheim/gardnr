@@ -34,6 +34,15 @@ angular.module('geo', [])
           } else {
             callback({error: 'do not support geolocation'});
           }
+        },
+        getAddress: function(lat, lng, callback){
+            $http({method: 'GET', url: '//maps.googleapis.com/maps/api/geocode/json?latlng='+lng+','+lat+'&sensor=true_or_false'}).
+              success(function (data, status, headers, config) {
+                callback(null, data)
+              }).
+              error(function (data, status, headers, config) {
+                callback(data);
+              });
         }
       }
     })
@@ -65,13 +74,14 @@ angular.module('geo', [])
         }
       };
     })
-    .directive('gmap', function($timeout){
+    .directive('gmap', function($timeout, $rootScope){
       return {
         restrict: 'A',
         scope: {
           gmap: '=',
           markers: '=',
-          imagePath: '='
+          imagePath: '=',
+          locationPick: '='
         },
         link: function ($scope, $element, $attributes) {
           var options = {
@@ -162,6 +172,10 @@ angular.module('geo', [])
               mapTypeId: google.maps.MapTypeId.ROADMAP,
               maxZoom: 18
             };
+
+            if($scope.locationPick && $scope.locationPick.enabled){
+              mapOptions.draggableCursor = 'crosshair';
+            }
 
             map = new google.maps.Map(document.getElementById(options.mapContainerId), mapOptions);
           }
@@ -269,6 +283,13 @@ angular.module('geo', [])
 
             infoBoxEventListeners = [];
             markers = [];
+          }
+
+          if($scope.locationPick && $scope.locationPick.enabled){
+            google.maps.event.addListener(map, 'click', function(event) {
+              console.log(event.latLng);
+              $rootScope.$emit('locationPicked', [event.latLng.A, event.latLng.k]);
+            });
           }
         }
       }

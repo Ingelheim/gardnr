@@ -44,6 +44,14 @@
 .login input {
   margin-bottom: 5px;
 }
+.big-btns {
+  margin-top: 150px;
+}
+.big-btns .btn-white {
+  height: 130px;
+  font-size: 15px;
+  font-weight: bold;
+}
 body {
   overflow-y: scroll;
   font-family: 'Open Sans', sans-serif;
@@ -83,14 +91,14 @@ h3 {
   position: absolute;
   top: 8px;
   right: 8px;
-  height: 17px;
-  width: 17px;
+  height: 15px;
+  width: 15px;
   background-color: #d9534f;
   border-radius: 50%;
   color: #fff;
   text-align: center;
   font-size: 11px;
-  line-height: 20px;
+  line-height: 15px;
 }
 .btn-white {
   height: 34px;
@@ -144,4 +152,7 @@ h3 {
 }
 .center-text {
   text-align: center;
+}
+.input-margin input {
+  margin-bottom: 8px;
 }
