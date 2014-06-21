@@ -30,6 +30,6 @@ gardnrApp.controller('MainCtrl', ['$scope', function ($scope) {
       }
     }
   ];
+
+  $scope.manuelsMerchantId = "RALBAY2LYDHSS";
 }]);
-
-
