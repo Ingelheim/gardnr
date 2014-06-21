@@ -11,11 +11,11 @@
     <link rel="stylesheet" href="vendor/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
+  <body ng-app="registerApp" ng-controller="RegisterCtrl">
     <div class="container">
       <div class="row login">
         <div class="col-xs-4 col-xs-offset-4">
-          <form role="form">
+          <form role="form" ng-hide="showSuccess">
             <input type="text" class="form-control" placeholder="name" required autofocus>
             <input type="email" class="form-control" placeholder="email address" required>
             <input type="password" class="form-control" placeholder="password" required>
@@ -23,10 +23,21 @@
             <label class="checkbox">
               <input type="checkbox" value="remember-me"> I accept terms and conditions
             </label>
-            <button class="btn btn-lg btn-block" type="submit">Sign up</button>
+            <button class="btn btn-primary btn-block" type="button" ng-click="register()" ng-disabled="loading">
+              <i class="fa fa-refresh fa-spin" ng-show="loading"></i>
+              Sign up
+            </button>
           </form>
+          <div class="alert alert-success center-text" ng-show="showSuccess">
+            <i class="fa fa-check fa-3x"></i><br>
+            You registered successfully.<br>
+            <a href="/login">Go to Login</a>
+          </div>
         </div>
       </div>
     </div>
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyACZRSZVWwlW9HHDsKKdW63dxg-PDDMHAA&amp;libraries=places&amp;sensor=false&amp;v=3"></script>
+    <script src="/js/vendor.js" type="text/javascript"></script>
+    <script src="/js/register/register.js" type="text/javascript"></script>
   </body>
 </html>

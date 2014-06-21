@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="vendor/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
+  <body ng-app="loginApp" ng-controller="LoginCtrl">
     <div class="container">
       <div class="row login">
         <div class="col-xs-4 col-xs-offset-4">
@@ -21,10 +21,16 @@
             <label class="checkbox">
               <input type="checkbox" value="remember-me"> Remember me
             </label>
-            <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-primary btn-block" type="button" ng-click="login()">
+              Sign in
+              <i class="fa fa-refresh fa-spin" ng-show="loading"></i>
+            </button>
           </form>
         </div>
       </div>
     </div>
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyACZRSZVWwlW9HHDsKKdW63dxg-PDDMHAA&amp;libraries=places&amp;sensor=false&amp;v=3"></script>
+    <script src="/js/vendor.js" type="text/javascript"></script>
+    <script src="/js/login/login.js" type="text/javascript"></script>
   </body>
 </html>
