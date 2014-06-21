@@ -23,6 +23,13 @@ gardnrApp.controller('MapCtrl', ['$scope', 'PaypalService', function ($scope, Pa
     lng: 13.393530
   }
 
+  $scope.user = {
+    firstname: 'Lisa',
+    lastname: 'Berg',
+    street: 'Alexanderstr. 3'
+  }
+
+
   $scope.gardens = [
     {
       name: "Power Primeln",

@@ -71,6 +71,20 @@ h3 {
 }
 .navbar {
   margin-bottom: 0;
+  border-radius: 0;
+}
+.navbar .notification {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 17px;
+  width: 17px;
+  background-color: #d9534f;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+  line-height: 20px;
 }
 .btn-white {
   height: 34px;
@@ -111,4 +125,17 @@ h3 {
 .no-gutter {
   padding-left: 0;
   padding-right: 0;
+}
+.grey {
+  color: #999;
+}
+.profile-image {
+  width: 150px;
+  margin-top: 10px;
+}
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+.center-text {
+  text-align: center;
 }
