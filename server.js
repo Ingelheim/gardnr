@@ -5,7 +5,15 @@ var express = require('express'),
   http = require('http').Server(app),
   MongoClient = require('mongodb').MongoClient,
   format = require('util').format,
-  paypal_sdk = require('paypal-rest-sdk');
+  paypal_sdk = require('paypal-rest-sdk'),
+  braintree = require('braintree');
+
+var braintreeGateWay = braintree.connect({
+  environment: braintree.Environment.Sandbox,
+  merchantId: '2cpmq4y2djfp6sn3',
+  publicKey: 'rbzs8s9sht5mg5tp',
+  privateKey: '3d86b13355e8b0503792a034236a8b3e'
+});
 
 paypal_sdk.configure({
   'mode': 'sandbox', //sandbox or live
@@ -26,40 +34,24 @@ app.get('/', function (req, res) {
 });
 
 app.get('/payment', function(req, res) {
-  var payment_details = {
-    "intent": "sale",
-    "payer": {
-      "payment_method": "credit_card",
-      "funding_instruments": [{
-        "credit_card": {
-          "type": "visa",
-          "number": "4417119669820331",
-          "expire_month": "11",
-          "expire_year": "2018",
-          "cvv2": "874",
-          "first_name": "Joe",
-          "last_name": "Shopper",
-          "billing_address": {
-            "line1": "Hauptstraße 123",
-            "city": "Berlin",
-            "state": "Berlin",
-            "postal_code": "56789",
-            "country_code": "DE" }}}]},
-    "transactions": [{
-      "amount": {
-        "total": "7.47",
-        "currency": "EUR"
-      },
-      "description": "This is the payment transaction description." }]
-  };
-
-  paypal_sdk.payment.create(payment_details, function(error, payment){
-    if(error){
-      console.error(error);
+  braintreeGateWay.transaction.sale({
+    amount: '5.00',
+    creditCard: {
+      number: '4111111111111111',
+      expirationMonth: '05',
+      expirationYear: '12'
+    }
+  }, function (err, result) {
+    if (err) {
       res.send(500);
+    }
+
+    if (result.success) {
+      console.log('Transaction: ' + result.transaction);
+      res.send(result);
     } else {
-      // console.log(payment);
-      res.send({success: 'kjh'});
+      console.log(result.message);
+      res.send(500);
     }
   });
 });
