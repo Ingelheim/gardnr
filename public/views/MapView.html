@@ -1,36 +1,54 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-5 col-sm-4 col-md-2">
+    <div class="col-xs-5 col-sm-4 col-md-3 no-gutter">
       <div class="row">
         <div class="col-xs-12">
           <h1>List of the local gardens</h1>
         </div>
       </div>
-      <div class="row garden">
+      <div class="row garden-item" ng-class="{'first': $index == 0}" ng-repeat="garden in gardens">
         <div class="col-xs-12">
-
+          <div class="row">
+            <div class="col-xs-2">
+              <i class="fa fa-leaf"></i>
+            </div>
+            <div class="col-xs-7">
+              {{garden.name}}
+            </div>
+            <div class="col-xs-3">
+              {{garden.distance}}m
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <strong>Recent Updates:</strong> {{garden.lastUpdate | date:'dd.MM.yyyy'}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <strong>Chief Squirrel:</strong> {{garden.manager}}
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-xs-7 col-sm-8 col-md-10">
+    <div class="col-xs-7 col-sm-8 col-md-9 no-gutter">
       <div class="infobox-wrapper">
         <div id="infobox-{{$index}}" ng-repeat="garden in gardens" class="infobox">
           <div class="row">
-            <div class="batch" >
-              <i class="fa fa-start"></i>
-            </div>
+            <div class="batch"></div>
             <div class="col-xs-12">
               <h2 class="pull-left"><a ng-href="/gardens/{{garden.slug}}">{{garden.name}}</a></h2>
-              <i class="fa fa-user pull-right member-count">&nbsp;24</i>
+              <i class="fa fa-user pull-right member-count">&nbsp;{{garden.members}}</i>
               <div class="clearfix"></div>
               <p>{{garden.address.street}}</p>
-              <p><strong>Manager:</strong> <a href="/userProfile/25211485">{{garden.manager}}</a></p>
+              <p><strong>Chief Squirrel:</strong> <a href="/userProfile/25211485">{{garden.manager}}</a></p>
               <p>
                 <strong>Description:</strong><br>
                 {{garden.description}}
               </p>
-              <p><strong>Last Update:</strong> <span>{{garden.lastUpdate | date:'dd.MM.yyyy'}}</span></p>
+              <p><strong>Recent Update:</strong> <span>{{garden.lastUpdate | date:'dd.MM.yyyy'}}</span></p>
             </div>
           </div>
         </div>

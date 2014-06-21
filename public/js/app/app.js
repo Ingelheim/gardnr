@@ -16,7 +16,6 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
 }]);
 
 
-
 gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
   $scope.startingLocation = {
     lat: 52.513480,
@@ -31,11 +30,9 @@ gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln',
-      price: {
-        name: 'Best of Summer Competition',
-        icon: 'batch',
-        place: '1'
-      },
+      members: 24,
+      batch: true,
+      distance: 200,
       address: {
         city: 'Berlin',
         postal: '10405',
@@ -44,63 +41,37 @@ gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
       }
     },
     {
-      name: "Power Primeln",
+      name: "Power Primeln 2",
       manager: "Alexander Hansen",
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
-      slug: 'power-primeln',
-      price: {
-        name: 'Best of Summer Competition',
-        icon: 'batch',
-        place: '1'
-      },
+      slug: 'power-primeln2',
+      members: 3,
+      distance: 300,
       address: {
         city: 'Berlin',
         postal: '10405',
         street: 'Prenzlauer Allee 219',
-        location: [13.393530, 52.513480]
+        location: [13.393530, 52.593480]
       }
     },
     {
-      name: "Power Primeln",
+      name: "Power Primeln 3",
       manager: "Alexander Hansen",
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln',
-      price: {
-        name: 'Best of Summer Competition',
-        icon: 'batch',
-        place: '1'
-      },
+      members: 1,
+      distance: 600,
       address: {
         city: 'Berlin',
         postal: '10405',
         street: 'Prenzlauer Allee 219',
-        location: [13.393530, 52.513480]
-      }
-    },
-    {
-      name: "Power Primeln",
-      manager: "Alexander Hansen",
-      icon: 'flower',
-      lastUpdate: '2014-06-20T23:00:00.000Z',
-      description: 'LOrem Ipsum dolor bla',
-      slug: 'power-primeln',
-      price: {
-        name: 'Best of Summer Competition',
-        icon: 'batch',
-        place: '1'
-      },
-      address: {
-        city: 'Berlin',
-        postal: '10405',
-        street: 'Prenzlauer Allee 219',
-        location: [13.393530, 52.513480]
+        location: [13.43530, 52.513480]
       }
     }
-
   ];
 
   $scope.manuelsMerchantId = "RALBAY2LYDHSS";
