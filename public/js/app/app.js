@@ -15,9 +15,8 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
     .otherwise('/map');
 }]);
 
+gardnrApp.controller('MainCtrl', ['$scope', 'PaypalService', function ($scope, PaypalService) {
 
-
-gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
   $scope.startingLocation = {
     lat: 52.513480,
     lng: 13.393530
@@ -103,5 +102,8 @@ gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
 
   ];
 
-  $scope.manuelsMerchantId = "RALBAY2LYDHSS";
+  $scope.payment = function() {
+    PaypalService.payment();
+  };
+
 }]);

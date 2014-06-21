@@ -15,9 +15,8 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
     .otherwise('/map');
 }]);
 
+gardnrApp.controller('MainCtrl', ['$scope', 'PaypalService', function ($scope, PaypalService) {
 
-
-gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
   $scope.startingLocation = {
     lat: 52.513480,
     lng: 13.393530
@@ -45,8 +44,31 @@ gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
     }
   ];
 
-  $scope.manuelsMerchantId = "RALBAY2LYDHSS";
+  $scope.payment = function() {
+    PaypalService.payment();
+  };
+
 }]);
+
+'use strict';
+
+angular.module('gardnr-app').service('PaypalService', function() {
+  
+  var service = {};
+
+  // paypalSdk.configure({
+  //   'mode': 'sandbox', //sandbox or live
+  //   'client_id': 'AcrWFxD--quh-W6KNpcNlK97j7649oz9bq2A2-9tljWr8dxAwri7V_-f54RL',
+  //   'client_secret': 'ECdNXhBr7DSycztxUe_IYqcxPKRF4h5U-feTW0YmQ2gOSizFNIxlDFzElrJV'
+  // });
+
+  service.payment = function () {
+    console.log(service.payment);
+  };
+
+  return service;
+
+});
 
 /**
  * Author: Thomas Schiela <thomas.schiel@gmail.com>
