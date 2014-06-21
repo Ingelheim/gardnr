@@ -93,4 +93,30 @@ gardnrApp.controller('MapCtrl', ['$scope', '$http', function ($scope, $http) {
     });
   };
 
+  $scope.register = function() {
+    console.log('registering');
+
+    var individual = {
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane@14ladders.com",
+      phone: "5553334444",
+      dateOfBirth: "1981-11-19",
+      address: {
+        streetAddress: "111 Main St",
+        locality: "Chicago",
+        region: "IL",
+        postalCode: "60622"
+      }
+    };
+    $http.post('/registerSubMerchant', individual)
+    .success(function() {
+      console.log('successfully registered')
+    })
+    .error(function(err) {
+      console.log(err)
+    });
+
+  }
+
 }]);
