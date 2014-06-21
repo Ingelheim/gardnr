@@ -4,10 +4,11 @@ var app = express();
 var http = require('http').Server(app);
 
 app.use(express.static(__dirname + '/public'));
-app.engine('html', require('ejs').renderFile);
+
+app.set('view engine', 'jade');
 
 app.get('/', function (req, res) {
-  res.render('index.html');
+  res.render('index');
 });
 
 
