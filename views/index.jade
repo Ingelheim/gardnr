@@ -1,29 +1,36 @@
 doctype
 html(lang="en")
-    head
-        meta(charset="utf-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1")
-        title gardnr
-        link(rel="stylesheet", href="vendor/css/bootstrap.min.css")
-        link(rel="stylesheet", href="vendor/css/font-awesome.min.css")
-        link(rel="stylesheet", href="css/style.css")
-    body(ng-app="gardnr-app", ng-controller="MainCtrl")
-        .infobox-wrapper
-            .infobox(id="infobox-{{$index}}", ng-repeat="marker in markers")
-                .col-xs-5
-                    // image from garden maybe here
-                .col-xs-7
-                    p {{markers.name}}
-        #gmap.map(gmap="startingLocation", markers="markers", image-path="'img/'")
-        .container
-            .row
-                .col-xs-12
-        script(src="//maps.googleapis.com/maps/api/js?key=AIzaSyACZRSZVWwlW9HHDsKKdW63dxg-PDDMHAA&libraries=places&sensor=false&v=3")
-        script(src="vendor/js/paypal-button.min.js?merchant={{manuelsMerchantId}}" data-button="donate" data-name="My product" data-amount="1.00" async)
-        script(src="vendor/js/infobox.js")
-        script(src="vendor/js/jquery-1.11.1.min.js")
-        script(src="vendor/js/angular.min.js")
-        script(src="vendor/js/bootstrap.min.js")
-        script(src="/js/app/modules/geo.js", type="text/javascript")
-        script(src="/js/app/app.js", type="text/javascript")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title gardnr
+    link(rel='stylesheet', href="http://fonts.googleapis.com/css?family=Roboto|Open+Sans")
+    link(rel="stylesheet", href="vendor/css/bootstrap.min.css")
+    link(rel="stylesheet", href="vendor/css/font-awesome.min.css")
+    link(rel="stylesheet", href="css/style.css")
+  body(ng-app="gardnr-app", ng-controller="MainCtrl")
+    .infobox-wrapper
+      .infobox(id="infobox-{{$index}}", ng-repeat="garden in gardens")
+        .row
+          .col-xs-12
+            h2 {{garden.name}}
+            p {{garden.address.street}}
+            p
+              Manager:
+              a(href="/userProfile/25211485")
+              {{garden.manager}}
+
+
+
+
+    #gmap.map(gmap="startingLocation", markers="gardens", image-path="'img/'")
+
+    script(src="//maps.googleapis.com/maps/api/js?key=AIzaSyACZRSZVWwlW9HHDsKKdW63dxg-PDDMHAA&libraries=places&sensor=false&v=3")
+    script(src="vendor/js/paypal-button.min.js?merchant={{manuelsMerchantId}}" data-button="donate" data-name="My product" data-amount="1.00" async)
+    script(src="vendor/js/infobox.js")
+    script(src="vendor/js/jquery-1.11.1.min.js")
+    script(src="vendor/js/angular.min.js")
+    script(src="vendor/js/bootstrap.min.js")
+    script(src="/js/app/modules/geo.js", type="text/javascript")
+    script(src="/js/app/app.js", type="text/javascript")

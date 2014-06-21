@@ -1,3 +1,6 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 .map {
   height: 600px;
   width: 100%;
@@ -6,14 +9,20 @@
   display: none;
 }
 .infobox {
-  height: 100px;
-  width: 280px;
+  min-height: 200px;
+  width: 380px;
   margin-top: 8px;
-  padding: 5px 3px;
+  padding: 15px;
   overflow: hidden;
   background-color: #fff;
   font: 10pt verdana;
   -webkit-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+}
+.infobox h2 {
+  padding: 0 0 10px 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
 }

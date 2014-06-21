@@ -187,7 +187,7 @@ angular.module('geo', [])
               content: document.getElementById('infobox-'+number),
               disableAutoPan: false,
               maxWidth: 150,
-              pixelOffset: new google.maps.Size(-20, -150),
+              pixelOffset: new google.maps.Size(0, -150),
               zIndex: null,
               boxStyle: {
                 background: "url('" + options.imagePath + "tipbox.gif') no-repeat",

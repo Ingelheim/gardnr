@@ -10,23 +10,21 @@ gardnrApp.controller('MainCtrl', ['$scope', function ($scope) {
     lng: 13.393530
   }
 
-  $scope.markers = [
+  $scope.gardens = [
     {
       name: "Power Primeln",
+      manager: "Alexander Hansen",
+      icon: 'flower',
+      price: {
+        name: 'Best of Summer Competition',
+        icon: 'batch',
+        place: '1'
+      },
       address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
         location: [13.393530, 52.513480]
-      }
-    },
-    {
-      name: "Power Primeln",
-      address: {
-        location: [13.453530, 52.23480]
-      }
-    },
-    {
-      name: "Power Primeln",
-      address: {
-        location: [13.43530, 52.73480]
       }
     }
   ];
