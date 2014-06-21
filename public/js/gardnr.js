@@ -15,7 +15,7 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
     .otherwise('/map');
 }]);
 
-gardnrApp.controller('MainCtrl', ['$scope', 'PaypalService', function ($scope, PaypalService) {
+gardnrApp.controller('MapCtrl', ['$scope', 'PaypalService', function ($scope, PaypalService) {
 
   $scope.startingLocation = {
     lat: 52.513480,
@@ -41,10 +41,69 @@ gardnrApp.controller('MainCtrl', ['$scope', 'PaypalService', function ($scope, P
         street: 'Prenzlauer Allee 219',
         location: [13.393530, 52.513480]
       }
+    },
+    {
+      name: "Power Primeln",
+      manager: "Alexander Hansen",
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      price: {
+        name: 'Best of Summer Competition',
+        icon: 'batch',
+        place: '1'
+      },
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.513480]
+      }
+    },
+    {
+      name: "Power Primeln",
+      manager: "Alexander Hansen",
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      price: {
+        name: 'Best of Summer Competition',
+        icon: 'batch',
+        place: '1'
+      },
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.513480]
+      }
+    },
+    {
+      name: "Power Primeln",
+      manager: "Alexander Hansen",
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      price: {
+        name: 'Best of Summer Competition',
+        icon: 'batch',
+        place: '1'
+      },
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.513480]
+      }
     }
+
   ];
 
   $scope.payment = function() {
+    console.log('payment');
     PaypalService.payment();
   };
 
@@ -52,7 +111,7 @@ gardnrApp.controller('MainCtrl', ['$scope', 'PaypalService', function ($scope, P
 
 'use strict';
 
-angular.module('gardnr-app').service('PaypalService', function() {
+angular.module('gardnr-app').service('PaypalService', ['$http', function($http) {
   
   var service = {};
 
@@ -63,12 +122,18 @@ angular.module('gardnr-app').service('PaypalService', function() {
   // });
 
   service.payment = function () {
-    console.log(service.payment);
+    $http.get('/payment')
+    .success(function() {
+      console.log('success')
+    })
+    .error(function(err) {
+      console.log(err)
+    })
   };
 
   return service;
 
-});
+}]);
 
 /**
  * Author: Thomas Schiela <thomas.schiel@gmail.com>

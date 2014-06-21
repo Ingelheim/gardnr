@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('gardnr-app').service('PaypalService', function() {
+angular.module('gardnr-app').service('PaypalService', ['$http', function($http) {
   
   var service = {};
 
@@ -11,9 +11,15 @@ angular.module('gardnr-app').service('PaypalService', function() {
   // });
 
   service.payment = function () {
-    console.log(service.payment);
+    $http.get('/payment')
+    .success(function() {
+      console.log('success')
+    })
+    .error(function(err) {
+      console.log(err)
+    })
   };
 
   return service;
 
-});
+}]);

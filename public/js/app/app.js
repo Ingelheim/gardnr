@@ -15,7 +15,7 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
     .otherwise('/map');
 }]);
 
-gardnrApp.controller('MainCtrl', ['$scope', 'PaypalService', function ($scope, PaypalService) {
+gardnrApp.controller('MapCtrl', ['$scope', 'PaypalService', function ($scope, PaypalService) {
 
   $scope.startingLocation = {
     lat: 52.513480,
@@ -103,6 +103,7 @@ gardnrApp.controller('MainCtrl', ['$scope', 'PaypalService', function ($scope, P
   ];
 
   $scope.payment = function() {
+    console.log('payment');
     PaypalService.payment();
   };
 
