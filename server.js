@@ -33,9 +33,10 @@ app.get('/', function (req, res) {
   res.render('index.html');
 });
 
-app.get('/payment', function(req, res) {
+app.get('/payment/:amount', function(req, res) {
+  console.log(req.params.amount);
   braintreeGateWay.transaction.sale({
-    amount: '5.00',
+    amount: '' + req.params.amount,
     creditCard: {
       number: '4111111111111111',
       expirationMonth: '05',
