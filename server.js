@@ -1,7 +1,8 @@
-var express = require('express');
-var _ = require("underscore");
-var app = express();
-var http = require('http').Server(app);
+var express = require('express'),
+    app = express(),
+    http = require('http').Server(app),
+    mongoose = require("mongoose"),
+    database = require('./db/dbConnection');
 
 app.use(express.static(__dirname + '/public'));
 
