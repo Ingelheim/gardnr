@@ -1,1 +1,25 @@
+@import "variables";
 @import "map";
+
+
+a {
+  -webkit-transition: color .4s;
+  transition: color .4s;
+  color: @linkColor;
+}
+
+a:link,
+a:visited {
+  color: @linkColor;
+}
+
+a:hover {
+  color: @linkHover;
+  text-decoration: none;
+}
+
+a:active {
+  -webkit-transition: color .3s;
+  transition: color .3s;
+  color: @linkActive;
+}

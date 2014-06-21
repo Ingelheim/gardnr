@@ -15,6 +15,8 @@ gardnrApp.controller('MainCtrl', ['$scope', function ($scope) {
       name: "Power Primeln",
       manager: "Alexander Hansen",
       icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
       price: {
         name: 'Best of Summer Competition',
         icon: 'batch',

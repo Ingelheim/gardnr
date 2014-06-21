@@ -9,20 +9,50 @@ body {
   display: none;
 }
 .infobox {
-  min-height: 200px;
+  min-height: 160px;
   width: 380px;
   margin-top: 8px;
   padding: 15px;
-  overflow: hidden;
   background-color: #fff;
   font: 10pt verdana;
-  -webkit-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
-  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.2);
 }
 .infobox h2 {
   padding: 0 0 10px 0;
   margin: 0;
   font-size: 16px;
   font-weight: bold;
+}
+.infobox .member-count {
+  margin-right: 20px;
+  color: #999;
+}
+.infobox .batch {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: -100px;
+  height: 47px;
+  width: 40px;
+  background: url('../img/star.png');
+}
+a {
+  -webkit-transition: color .4s;
+  transition: color .4s;
+  color: #8dc63f;
+}
+a:link,
+a:visited {
+  color: #8dc63f;
+}
+a:hover {
+  color: #567b24;
+  text-decoration: none;
+}
+a:active {
+  -webkit-transition: color .3s;
+  transition: color .3s;
+  color: #bcdd8e;
 }
