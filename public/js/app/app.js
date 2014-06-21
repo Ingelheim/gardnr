@@ -1,10 +1,23 @@
 'use strict';
 
 var gardnrApp = angular.module('gardnr-app', [
+  'ngRoute',
+  'ngResource',
   'geo'
 ]);
 
-gardnrApp.controller('MainCtrl', ['$scope', function ($scope) {
+gardnrApp.config(['$routeProvider', function($routeProvider) {
+  $routeProvider
+    .when('/map', {
+      templateUrl: '/views/MapView.html',
+      controller: 'MapCtrl'
+    })
+    .otherwise('/map');
+}]);
+
+
+
+gardnrApp.controller('MapCtrl', ['$scope', function ($scope) {
   $scope.startingLocation = {
     lat: 52.513480,
     lng: 13.393530
@@ -17,6 +30,7 @@ gardnrApp.controller('MainCtrl', ['$scope', function ($scope) {
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
       price: {
         name: 'Best of Summer Competition',
         icon: 'batch',

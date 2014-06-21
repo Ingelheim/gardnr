@@ -7,39 +7,16 @@
     <title>gardnr</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto|Open+Sans">
     <link rel="stylesheet" href="vendor/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="vendor/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-  <body ng-app="gardnr-app" ng-controller="MainCtrl">
-    <div class="infobox-wrapper">
-      <div id="infobox-{{$index}}" ng-repeat="garden in gardens" class="infobox">
-        <div class="row">
-          <div class="batch" >
-            <i class="fa fa-start"></i>
-          </div>
-          <div class="col-xs-12">
-            <h2 class="pull-left">{{garden.name}}</h2>
-            <i class="fa fa-user pull-right member-count">&nbsp;24</i>
-            <div class="clearfix"></div>
-            <p>{{garden.address.street}}</p>
-            <p><strong>Manager:</strong> <a href="/userProfile/25211485">{{garden.manager}}</a></p>
-            <p>
-              <strong>Description:</strong><br>
-              {{garden.description}}
-            </p>
-            <p><strong>Last Update:</strong> <span>{{garden.lastUpdate | date:'dd.MM.yyyy'}}</span></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="gmap" gmap="startingLocation" markers="gardens" image-path="'img/'" class="map"></div>
+  <body ng-app="gardnr-app">
+    <div ng-view></div>
 
     <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyACZRSZVWwlW9HHDsKKdW63dxg-PDDMHAA&amp;libraries=places&amp;sensor=false&amp;v=3"></script>
-    <script src="vendor/js/infobox.js"></script>
-    <script src="vendor/js/jquery-1.11.1.min.js"></script>
-    <script src="vendor/js/angular.min.js"></script>
-    <script src="vendor/js/bootstrap.min.js"></script>
-    <script src="/js/app/modules/geo.js" type="text/javascript"></script>
-    <script src="/js/app/app.js" type="text/javascript"></script>
+
+    <script src="/js/vendor.js" type="text/javascript"></script>
+    <script src="/js/gardnr.js" type="text/javascript"></script>
   </body>
 </html>

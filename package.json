@@ -7,6 +7,15 @@
   "scripts": {
     "start": "node server.js"
   },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "protractor": "latest",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-watch": "latest"
+  },
   "dependencies": {
     "express": "4.4.1",
     "underscore": "1.6.0",
