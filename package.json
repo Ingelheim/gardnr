@@ -1,0 +1,15 @@
+{
+  "name": "hackathon-solarcalc",
+  "version": "0.0.1",
+  "description": "Startupbootcamp Hackathon 2014 App",
+  "main": "server.js",
+  "author": "TBD",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.4.1",
+    "underscore": "1.6.0",
+    "ejs": "~1.0.0"
+  }
+}
