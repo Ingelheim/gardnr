@@ -10,5 +10,7 @@ app.get('/', function (req, res) {
   res.render('index.html');
 });
 
-http.listen(8081);
-console.log("App listening on port 8081");
+
+var PORT = 8081;
+http.listen(PORT);
+console.log("App listening on port " + PORT);
