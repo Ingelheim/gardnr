@@ -6,7 +6,6 @@ var express = require('express'),
   http = require('http').Server(app),
   MongoClient = require('mongodb').MongoClient,
   format = require('util').format,
-  paypal_sdk = require('paypal-rest-sdk'),
   braintree = require('./braintreeBackend');
 
 var db = MongoClient.connect('mongodb://gardnr:gardnrApp123@ds048487.mongolab.com:48487/gardnr', function (err, db) {
@@ -34,6 +33,6 @@ app.get('/payment/:amount/:merchantId', braintree.payment);
 
 app.post('/registerSubMerchant', braintree.registerSubMerchant);
 
-var PORT = 8081;
+var PORT = process.env.PORT || 5000;
 http.listen(PORT);
 console.log("App listening on port " + PORT);
