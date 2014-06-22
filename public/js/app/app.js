@@ -73,16 +73,17 @@ gardnrApp.controller('MapCtrl', [
     street: 'Alexanderstr. 3'
   }
 
-  $scope.payment = brainTreeService.payment;
-
   $scope.openDonateModal = function(){
     $('#donateModal').modal('show');
   }
 
-  $scope.doDonation = function(){
-    $scope.loading = true;
+  $scope.doDonation = function(amont, merchantId){
+    $scope.loading = true; 
 
     $timeout(function(){
+
+      brainTreeService.payment(amont, merchantId);
+
       $scope.loading = false;
       $('#donateModal').modal('hide');
     }, 600);
