@@ -25,7 +25,8 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
     })
     .when('/garden/map', {
       templateUrl: '/views/GardenView.html',
-      controller: 'GardenCtrl'
+      controller: 'GardenCtrl',
+      reloadOnSearch: false
     })
     .otherwise('/map');
 }]);
@@ -40,8 +41,10 @@ gardnrApp.controller('MapCtrl', [
   'GeocodeService',
   'LocationPickService',
   'brainTreeService',
-  function ($rootScope, $scope, $http, $route, $location, $timeout, GeocodeService, LocationPickService, brainTreeService) {
+  'GardenModel',
+  function ($rootScope, $scope, $http, $route, $location, $timeout, GeocodeService, LocationPickService, brainTreeService, GardenModel) {
   $scope.loading = false;
+  $scope.gardens = GardenModel.getAll();
 
   $scope.locationPick = {
     enabled: $route.current.params.pickloc,
@@ -59,73 +62,11 @@ gardnrApp.controller('MapCtrl', [
     street: 'Alexanderstr. 3'
   }
 
-  $scope.gardens = [
-    {
-      name: "Power Primeln",
-      manager: {
-        name: 'Maria Thien',
-        email: 'maria.thien@gmx.de'
-      },
-      icon: 'flower',
-      lastUpdate: '2014-06-20T23:00:00.000Z',
-      description: 'LOrem Ipsum dolor bla',
-      slug: 'power-primeln',
-      members: 24,
-      batch: true,
-      distance: 200,
-      address: {
-        city: 'Berlin',
-        postal: '10405',
-        street: 'Prenzlauer Allee 219',
-        location: [13.393530, 52.513480]
-      }
-    },
-    {
-      name: "Power Primeln 2",
-      manager: {
-        name: 'Anna Sieners',
-        email: 'anna.sieners@gmail.com'
-      },
-      icon: 'flower',
-      lastUpdate: '2014-06-20T23:00:00.000Z',
-      description: 'LOrem Ipsum dolor bla',
-      slug: 'power-primeln2',
-      members: 3,
-      distance: 300,
-      address: {
-        city: 'Berlin',
-        postal: '10405',
-        street: 'Prenzlauer Allee 219',
-        location: [13.393530, 52.593480]
-      }
-    },
-    {
-      name: "Power Primeln 3",
-      manager: {
-        name: 'Alexander Hansen',
-        email: 'alex@hansens.com'
-      },
-      icon: 'flower',
-      lastUpdate: '2014-06-20T23:00:00.000Z',
-      description: 'LOrem Ipsum dolor bla',
-      slug: 'power-primeln',
-      members: 1,
-      distance: 600,
-      address: {
-        city: 'Berlin',
-        postal: '10405',
-        street: 'Prenzlauer Allee 219',
-        location: [13.43530, 52.513480]
-      }
-    }
-  ];
-
   $scope.payment = brainTreeService.payment;
 
   $scope.register = brainTreeService.register;
 
 }]);
-
 
 
 gardnrApp.directive('radio', function ($timeout) {
@@ -157,3 +98,4 @@ gardnrApp.directive('radio', function ($timeout) {
     }
   }
 });
+

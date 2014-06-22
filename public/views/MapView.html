@@ -20,7 +20,7 @@
           <h1>List of the local gardens</h1>
         </div>
       </div>
-      <div class="row garden-item" ng-class="{'first': $index == 0}" ng-repeat="garden in gardens track by $index">
+      <div class="row garden-item" ng-class="{'first': $index == 0}" ng-repeat="garden in gardens track by $index | orderBy:distance">
         <div class="col-xs-12">
           <div class="row">
             <div class="col-xs-2">

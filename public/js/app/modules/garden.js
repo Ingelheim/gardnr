@@ -4,8 +4,7 @@
  * Time: 23:05
  */
 
-var garden = angular.module('garden', [
-]);
+var garden = angular.module('garden', []);
 
 garden.controller('NewGardenCtrl', [
   '$scope',
@@ -50,9 +49,10 @@ garden.controller('GardenCtrl', [
   '$timeout',
   'GeocodeService',
   'LocationPickService',
-  'brainTreeService',
-  function ($rootScope, $scope, $http, $route, $location, $timeout,GeocodeService, LocationPickService, brainTreeService) {
+  'GardenModel',
+  function ($rootScope, $scope, $http, $route, $location, $timeout, GeocodeService, LocationPickService, GardenModel) {
     $scope.loading = false;
+    $scope.gardens = [];
 
     $scope.newGarden = {
       name: "",
@@ -118,6 +118,9 @@ garden.controller('GardenCtrl', [
             location: [data[0], data[1]]
           }
 
+          GardenModel.add($scope.newGarden);
+          $scope.gardens.push(GardenModel.getLast());
+
           // nasty hack, normally that should be go into a directve and service
           $('#newGardenModal').modal('show');
         }
@@ -153,6 +156,81 @@ garden.factory('LocationPickService', function () {
         postal: _postal,
         city: _city
       }
+    }
+  }
+});
+
+garden.factory('GardenModel', function () {
+  var _gardens = [
+    {
+      name: "Power Primeln",
+      manager: {
+        name: 'Maria Thien',
+        email: 'maria.thien@gmx.de'
+      },
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      members: 24,
+      batch: true,
+      distance: 200,
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.513480]
+      }
+    },
+    {
+      name: "Power Primeln 2",
+      manager: {
+        name: 'Anna Sieners',
+        email: 'anna.sieners@gmail.com'
+      },
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln2',
+      members: 3,
+      distance: 300,
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.393530, 52.593480]
+      }
+    },
+    {
+      name: "Power Primeln 3",
+      manager: {
+        name: 'Alexander Hansen',
+        email: 'alex@hansens.com'
+      },
+      icon: 'flower',
+      lastUpdate: '2014-06-20T23:00:00.000Z',
+      description: 'LOrem Ipsum dolor bla',
+      slug: 'power-primeln',
+      members: 1,
+      distance: 600,
+      address: {
+        city: 'Berlin',
+        postal: '10405',
+        street: 'Prenzlauer Allee 219',
+        location: [13.43530, 52.513480]
+      }
+    }
+  ];
+
+  return {
+    getAll: function () {
+      return _gardens;
+    },
+    getLast: function(){
+      return _gardens[_gardens.length - 1];
+    },
+    add: function(garden){
+      _gardens.push(garden);
     }
   }
 });
