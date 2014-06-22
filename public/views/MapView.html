@@ -135,7 +135,7 @@
           <button class="btn btn-white btn-block" type="button"><i class="fa fa-question-circle"></i> Provide with tools</button>
         </div>
         <div class="col-xs-6">
-          <button class="btn btn-white btn-block" type="button"><i class="fa fa-dollar"></i> Donate</button>
+          <button class="btn btn-white btn-block" type="button" ng-click="payment(4.44, gardens[0].manager.merchantId)"><i class="fa fa-dollar"></i> Donate</button>
         </div>
         <div class="col-xs-6">
           <button class="btn btn-white btn-block" type="button"><i class="fa fa-question-circle"></i> Provide with adwise</button>
@@ -148,7 +148,6 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-    <button ng-click="payment(4.44)">Payment</button>
     <button ng-click="register()">Register to receive donations</button>
     </div>
   </div>

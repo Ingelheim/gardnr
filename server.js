@@ -30,7 +30,7 @@ app.get('/register', function (req, res) {
   res.render('register.html');
 });
 
-app.get('/payment/:amount', braintree.payment);
+app.get('/payment/:amount/:merchantId', braintree.payment);
 
 app.post('/registerSubMerchant', braintree.registerSubMerchant);
 

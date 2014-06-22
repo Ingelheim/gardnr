@@ -12,7 +12,6 @@ var braintreeGateWay = braintree.connect({
 });
 
 exports.registerSubMerchant = function(req, res) {
-  console.log(req.body);
   var merchantAccountParams = {
     individual: req.body,
     funding: {
@@ -31,7 +30,7 @@ exports.registerSubMerchant = function(req, res) {
       console.error(err);
       res.send(500);
     } else if (result && result.success) {
-      console.log('result: ' + result);
+      console.log('result: ' + JSON.stringify(result));
       res.send(result);
     } else {
       console.log('something wrong, result: ', result);
@@ -41,15 +40,15 @@ exports.registerSubMerchant = function(req, res) {
 }
 
 exports.payment = function(req, res) {
-  console.log(req.params.amount);
   braintreeGateWay.transaction.sale({
     amount: '' + req.params.amount,
-    // merchantAccountId: anotherTestMerchantId,
+    merchantAccountId: req.params.merchantId,
     creditCard: {
       number: '4111111111111111',
       expirationMonth: '05',
       expirationYear: '12'
-    }
+    },
+    service_fee_amount: "0.00"
   }, function (err, result) {
     if (err) {
       console.error(err);
