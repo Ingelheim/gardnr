@@ -9,6 +9,7 @@ var profile = angular.module('profile', [
 
 
 profile.controller('UserCtrl', ['$scope', 'brainTreeService', function ($scope, brainTreeService) {
+  $scope.loading = false;
 
   $scope.user = {
     firstname: 'Lisa',
@@ -19,14 +20,16 @@ profile.controller('UserCtrl', ['$scope', 'brainTreeService', function ($scope, 
   };
 
   $scope.register = function(firstName, lastName, email) {
-    console.log($scope.user.merchantId);
+    $scope.loading = true;
 
     brainTreeService.register(firstName, lastName, email)
     .success(function(result) {
       console.log('successfully registered: ', result);
+        $scope.loading = false;
       $scope.user.merchantId = result.merchantAccount.id;
     })
     .error(function(err) {
+        $scope.loading = false;
       console.log(err)
     });
 

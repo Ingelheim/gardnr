@@ -127,7 +127,11 @@ garden.controller('GardenCtrl', [
       });
     }, true);
 
-   $scope.close = function(){
+    $scope.donate = function(){
+      $('#donateModal').modal('show');
+    }
+
+    $scope.close = function(){
       $scope.loading = true;
 
       $timeout(function(){
@@ -135,6 +139,15 @@ garden.controller('GardenCtrl', [
         $('#newGardenModal').modal('hide');
         $scope.locationPick.enabled = false;
         $location.search('pickloc', null);
+      }, 600);
+    }
+
+    $scope.doDonation = function(){
+      $scope.loading = true;
+
+      $timeout(function(){
+        $scope.loading = false;
+        $('#donateModal').modal('hide');
       }, 600);
     }
   }]);

@@ -37,27 +37,27 @@
     <div class="col-xs-5 col-sm-4 col-md-3 no-gutter button-list">
       <div class="row">
         <div class="col-xs-12">
-          <a href="#"><i class="fa fa-gear"></i> Manage</a>
+          <a href="#"><i class="fa fa-gear fa-2x"></i> Manage</a>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <a href="#"><i class="fa fa-dollar"></i> Donate</a>
+          <a ng-click="donate()" style="cursor:pointer"><i class="fa fa-dollar fa-2x"></i> Donate</a>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <a href="#"><i class="fa fa-mail-forward"></i> Join Work</a>
+          <a href="#"><i class="fa fa-mail-forward fa-2x"></i> Join Work</a>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <a href="#"><i class="fa fa-cog"></i> Provide with tools</a>
+          <a href="#"><i class="fa fa-cog fa-2x"></i> Provide with tools</a>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <a href="#"><i class="fa fa-heart"></i> Provide with advise</a>
+          <a href="#"><i class="fa fa-heart fa-2x"></i> Provide with advise</a>
         </div>
       </div>
     </div>
@@ -130,6 +130,53 @@
           <i class="fa fa-refresh fa-spin" ng-show="loading"></i>
           <i class="fa fa-check" ng-hide="loading"></i>
           &nbsp;Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="donateModal" tabindex="-1" role="dialog" aria-labelledby="myDonateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myDonateModalLabel">Donate to {{newGarden.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <label>Choose an icon for your garden</label>
+            <div class="btn-group btn-group-justified icon-picker">
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="amount" radio="5">5 EUR</button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="amount" radio="10">10 EUR</button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="amount" radio="20">20 EUR</button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="amount" radio="30">30 EUR</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+            <label for="amount">... or type on your own:</label>
+            <input class="form-control" type="text" ng-model="amount" id="amount">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="abort" href="#" data-dismiss="modal">Abort</a>
+        <button type="button" class="btn btn-highlight" ng-click="doDonation()" ng-disabled="loading">
+          <i class="fa fa-refresh fa-spin" ng-show="loading"></i>
+          <i class="fa fa-dollar" ng-hide="loading"></i>
+          &nbsp;Donate
         </button>
       </div>
     </div>

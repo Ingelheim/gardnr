@@ -57,20 +57,20 @@ body {
 a {
   -webkit-transition: color .4s;
   transition: color .4s;
-  color: #8dc63f;
+  color: #45a498;
 }
 a:link,
 a:visited {
-  color: #8dc63f;
+  color: #45a498;
 }
 a:hover {
-  color: #567b24;
+  color: #275c55;
   text-decoration: none;
 }
 a:active {
   -webkit-transition: color .3s;
   transition: color .3s;
-  color: #bcdd8e;
+  color: #84cbc2;
 }
 h1 {
   font-size: 16px;
@@ -87,19 +87,20 @@ h3 {
 }
 .navbar .notification {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  height: 15px;
-  width: 15px;
-  background-color: #d9534f;
+  top: 6px;
+  right: 6px;
+  height: 19px;
+  width: 19px;
+  background-color: #ffffff;
+  border: 2px solid #e86f09;
   border-radius: 50%;
-  color: #fff;
+  color: #e86f09;
   text-align: center;
   font-size: 11px;
   line-height: 15px;
 }
 .btn-highlight {
-  background-color: #8dc63f;
+  background-color: #45a498;
   color: #fff;
   -webkit-border-radius: 1px;
   border-radius: 1px;
@@ -115,7 +116,7 @@ h3 {
   color: #fff;
 }
 .btn-highlight:hover {
-  background-color: #72a230;
+  background-color: #368077;
   color: #fff;
 }
 .btn-white {
@@ -180,7 +181,7 @@ h3 {
   margin-bottom: 8px;
 }
 .icon-picker .active {
-  background: #8dc63f;
+  background: #45a498;
   color: #fff;
 }
 .icon-picker .btn {
@@ -192,4 +193,18 @@ h3 {
 }
 .button-list .row .col-xs-12 {
   display: inline;
+}
+.highlight-bg {
+  background-image: -webkit-linear-gradient(top, #45a498 0, #43a095 100%);
+  background-image: linear-gradient(to bottom, #45a498 0, #43a095 100%);
+  background-repeat: repeat-x;
+  color: #fff;
+}
+.highlight-bg a,
+.highlight-bg a:link,
+.highlight-bg a:hover,
+.highlight-bg a:focus,
+.highlight-bg a:active {
+  color: #fff !important;
+  text-shadow: none;
 }

@@ -10,8 +10,8 @@
       <div class="row">
         <div class="col-xs-5">
           <img class="img-responsive img-thumbnail" src="img/sq1.jpg">
-          <a ng-click="register(user.firstname, user.lastname, user.email)" ng-if="!user.merchantId"><i class="fa fa-dollar"></i>Connect to Braintree</a><br>
-          <a ng-if="user.merchantId"><i class="fa fa-dollar"></i>Merchant ID: {{user.merchantId}}</a><br>
+          <a ng-click="register(user.firstname, user.lastname, user.email)" ng-if="!user.merchantId" style="cursor: pointer"><i class="fa fa-dollar"></i>Connect to Braintree <i class="fa fa-refresh fa-spin" ng-show="loading"></i></a><br>
+          <span ng-if="user.merchantId">Merchant ID: {{user.merchantId}}</span><br>
           <a href="#"><i class="fa fa-question-circle"></i> Help</a>
         </div>
         <div class="col-xs-7">
@@ -22,7 +22,7 @@
             <input type="email" class="form-control" id="email" placeholder="email address" required autofocus ng-model="user.email">
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="change password" required>
-            <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-highlight btn-block" type="submit"><i class="fa fa-check"></i> &nbsp;Save</button>
           </form>
         </div>
       </div>

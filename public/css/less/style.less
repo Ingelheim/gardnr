@@ -49,13 +49,14 @@ h3 {
 
   .notification {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    height: 15px;
-    width: 15px;
-    background-color: #d9534f;
+    top: 6px;
+    right: 6px;
+    height: 19px;
+    width: 19px;
+    background-color: #ffffff;
+    border: 2px solid @highlight2;
     border-radius: 50%;
-    color: #fff;
+    color: @highlight2;
     text-align: center;
     font-size: 11px;
     line-height: 15px;
@@ -180,6 +181,24 @@ h3 {
     .col-xs-12 {
       display: inline;
     }
+  }
+}
+
+.highlight-bg {
+
+
+  background-image: -webkit-linear-gradient(top, @highlight1 0, darken(@highlight1, 1%) 100%);
+  background-image: linear-gradient(to bottom, @highlight1 0, darken(@highlight1, 1%) 100%);
+  background-repeat: repeat-x;
+  color: #fff;
+
+  a,
+  a:link,
+  a:hover,
+  a:focus,
+  a:active {
+    color: #fff !important;
+    text-shadow: none;
   }
 }
 
