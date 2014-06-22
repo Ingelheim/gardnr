@@ -186,3 +186,10 @@ h3 {
 .icon-picker .btn {
   height: 90px;
 }
+.button-list .row {
+  margin-left: 15px;
+  margin-bottom: 15px;
+}
+.button-list .row .col-xs-12 {
+  display: inline;
+}

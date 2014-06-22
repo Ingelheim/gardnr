@@ -4,16 +4,14 @@
       <img class="img-responsive profile-image img-thumbnail center-block" src="img/sq1.jpg">
     </div>
     <div class="col-xs-7 col-sm-8 col-md-10 no-gutter">
-      <h1>Welcome back</h1>
-      <h2>
-        {{user.firstname}} {{user.lastname}} <a href="/#/profile/lisa-berg"><i class="fa fa-pencil"></i></a>
-      </h2>
+      <h1>{{newGarden.name}}</h1>
       <p>
-        {{user.street}}
+        {{newGarden.address.street}}<br>
+        {{newGarden.address.postal}} {{newGarden.address.city}}
       </p>
     </div>
   </div>
-  <div class="row margin-bottom-20">
+  <div class="row">
     <div class="col-xs-7 col-sm-8 col-md-9 no-gutter">
       <div class="infobox-wrapper">
         <div id="infobox-{{$index}}" ng-repeat="garden in gardens track by $index" class="infobox">
@@ -36,35 +34,53 @@
       </div>
       <div id="gmap" gmap="startingLocation" markers="gardens" image-path="'img/'" class="map" location-pick="locationPick"></div>
     </div>
-    <div class="col-xs-5 col-sm-4 col-md-3 no-gutter">
-
+    <div class="col-xs-5 col-sm-4 col-md-3 no-gutter button-list">
+      <div class="row">
+        <div class="col-xs-12">
+          <a href="#"><i class="fa fa-gear"></i> Manage</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <a href="#"><i class="fa fa-dollar"></i> Donate</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <a href="#"><i class="fa fa-mail-forward"></i> Join Work</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <a href="#"><i class="fa fa-cog"></i> Provide with tools</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <a href="#"><i class="fa fa-heart"></i> Provide with advise</a>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row">
     <div class="col-xs-5 col-sm-8 col-md-9">
       <div class="row big-btns">
         <div class="col-xs-4">
-          <button class="btn btn-white btn-block" type="button" ng-click="pickLocation()" ng-disabled="garden.address != null">
-            <i class="fa fa-map-marker fa-2x"></i><br>
-            <span ng-hide="garden.address != null">Add Location</span>
-            <span ng-show="garden.address != null">
-              <br>
-              {{garden.address.street}}<br>
-              {{garden.address.postal}}<br>
-              {{garden.address.city}}
-            </span>
-          </button>
-        </div>
-        <div class="col-xs-4">
-          <button class="btn btn-white btn-block" type="button" ng-disabled="garden.address == null">
+          <button class="btn btn-white btn-block" type="button" ng-disabled="newGarden.address == null">
             <i class="fa fa-photo fa-2x"></i><br>
             Upload Photo
           </button>
         </div>
         <div class="col-xs-4">
-          <button class="btn btn-white btn-block" type="button" ng-disabled="garden.address == null">
+          <button class="btn btn-white btn-block" type="button" ng-disabled="newGarden.address == null">
             <i class="fa fa-envelope fa-2x"></i><br>
             Write a message
+          </button>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-white btn-block" type="button" ng-disabled="newGarden.address == null">
+            <i class="fa fa-check fa-2x"></i><br>
+            Finish edit
           </button>
         </div>
       </div>
@@ -80,7 +96,7 @@
         <h4 class="modal-title" id="myModalLabel">New Garden {{newGarden.name}}</h4>
       </div>
       <div class="modal-body">
-        <div class="row margin-bottom-20">
+        <div class="row">
           <div class="col-xs-6">
             <label><i class="fa fa-map-marker"></i> Address</label><br>
             {{newGarden.address.street}}, {{newGarden.address.postal}}, {{newGarden.address.city}}<br><br>
