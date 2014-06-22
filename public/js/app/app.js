@@ -40,8 +40,13 @@ gardnrApp.controller('MapCtrl', [
   'GeocodeService',
   'LocationPickService',
   'brainTreeService',
-  function ($rootScope, $scope, $http, $route, $location, $timeout,GeocodeService, LocationPickService, brainTreeService) {
+  function ($rootScope, $scope, $http, $route, $location, $timeout, GeocodeService, LocationPickService, brainTreeService) {
   $scope.loading = false;
+
+  $scope.locationPick = {
+    enabled: $route.current.params.pickloc,
+    location: []
+  }
 
   $scope.startingLocation = {
     lat: 52.513480,
