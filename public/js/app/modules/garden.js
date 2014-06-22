@@ -193,6 +193,7 @@ garden.factory('GardenModel', function () {
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln',
+      image: 'garden-1.png',
       members: 24,
       batch: true,
       distance: 200,
@@ -215,6 +216,7 @@ garden.factory('GardenModel', function () {
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln2',
       members: 3,
+      image: 'garden-2.jpg',
       distance: 300,
       address: {
         city: 'Berlin',
@@ -235,6 +237,7 @@ garden.factory('GardenModel', function () {
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln',
       members: 1,
+      image: 'garden-3.jpg',
       distance: 600,
       address: {
         city: 'Berlin',
@@ -244,6 +247,7 @@ garden.factory('GardenModel', function () {
       }
     }
   ];
+
 
   return {
     getAll: function () {
