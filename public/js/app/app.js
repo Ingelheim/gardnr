@@ -28,7 +28,9 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
       controller: 'GardenCtrl',
       reloadOnSearch: false
     })
-    .otherwise('/map');
+    .otherwise({
+      redirectTo: '/map'
+    });
 }]);
 
 gardnrApp.controller('MapCtrl', [
@@ -63,6 +65,19 @@ gardnrApp.controller('MapCtrl', [
   }
 
   $scope.payment = brainTreeService.payment;
+
+  $scope.openDonateModal = function(){
+    $('#donateModal').modal('show');
+  }
+
+  $scope.doDonation = function(){
+    $scope.loading = true;
+
+    $timeout(function(){
+      $scope.loading = false;
+      $('#donateModal').modal('hide');
+    }, 600);
+  }
 
 }]);
 
