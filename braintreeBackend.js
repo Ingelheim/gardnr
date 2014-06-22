@@ -23,14 +23,12 @@ exports.registerSubMerchant = function(req, res) {
     masterMerchantAccountId: ourMasterMerchantId
   };
 
-  console.log('Sending merchantAccountParams:', merchantAccountParams);
-
   braintreeGateWay.merchantAccount.create(merchantAccountParams, function (err, result) {
     if (err) {
       console.error(err);
       res.send(500);
     } else if (result && result.success) {
-      console.log('result: ' + JSON.stringify(result));
+      console.log('merchantId: ' + result.merchantAccount.id);
       res.send(result);
     } else {
       console.log('something wrong, result: ', result);

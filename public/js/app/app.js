@@ -64,8 +64,6 @@ gardnrApp.controller('MapCtrl', [
 
   $scope.payment = brainTreeService.payment;
 
-  $scope.register = brainTreeService.register;
-
 }]);
 
 

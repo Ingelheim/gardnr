@@ -5,13 +5,13 @@ angular.module('gardnr-app')
 
   var service = {};
 
-  service.register = function() {
-    console.log('registering');
+  service.register = function(firstName, lastName, email) {
+    console.log('registering', firstName, lastName, email);
 
     var individual = {
-      firstName: "Maria",
-      lastName: "Thien",
-      email: "maria.thien@gmx.de",
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
       phone: "5553334444",
       dateOfBirth: "1981-11-19",
       address: {
@@ -21,13 +21,7 @@ angular.module('gardnr-app')
         postalCode: "60622"
       }
     };
-    $http.post('/registerSubMerchant', individual)
-    .success(function() {
-      console.log('successfully registered')
-    })
-    .error(function(err) {
-      console.log(err)
-    });
+    return $http.post('/registerSubMerchant', individual);
   };
 
   service.payment = function(amount, managerId) {
