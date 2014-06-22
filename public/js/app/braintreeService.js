@@ -9,9 +9,9 @@ angular.module('gardnr-app')
     console.log('registering');
 
     var individual = {
-      firstName: "Jane",
-      lastName: "Doe",
-      email: "jane@14ladders.com",
+      firstName: "Maria",
+      lastName: "Thien",
+      email: "maria.thien@gmx.de",
       phone: "5553334444",
       dateOfBirth: "1981-11-19",
       address: {
@@ -30,9 +30,9 @@ angular.module('gardnr-app')
     });
   };
 
-  service.payment = function(amount) {
-    console.log('payment: ', amount);
-    $http.get('/payment/' + amount)
+  service.payment = function(amount, managerId) {
+    console.log('payment: ', amount, managerId);
+    $http.get('/payment/' + amount + '/' + managerId)
     .success(function() {
       console.log('success')
     })
