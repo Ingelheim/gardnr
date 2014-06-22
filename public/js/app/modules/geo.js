@@ -116,9 +116,7 @@ angular.module('geo', [])
                 if($scope.markers.length > 0){
                   for(var i = 0; i < $scope.markers.length; i++){
                     // check if only limit has changed (show more button was clicked)
-                    if(newValue[i].limit == oldValue[i].limit && newValue[i].slots == oldValue[i].slots){
-                      addMarker(i, $scope.markers[i].address.location[1], $scope.markers[i].address.location[0]);
-                    }
+                    addMarker(i, $scope.markers[i].address.location[1], $scope.markers[i].address.location[0]);
                   }
 
                   // zoom map to fitt all markers

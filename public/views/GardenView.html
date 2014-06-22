@@ -1,0 +1,121 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-5 col-sm-4 col-md-2 no-gutter">
+      <img class="img-responsive profile-image img-thumbnail center-block" src="img/sq1.jpg">
+    </div>
+    <div class="col-xs-7 col-sm-8 col-md-10 no-gutter">
+      <h1>Welcome back</h1>
+      <h2>
+        {{user.firstname}} {{user.lastname}} <a href="/#/profile/lisa-berg"><i class="fa fa-pencil"></i></a>
+      </h2>
+      <p>
+        {{user.street}}
+      </p>
+    </div>
+  </div>
+  <div class="row margin-bottom-20">
+    <div class="col-xs-7 col-sm-8 col-md-9 no-gutter">
+      <div class="infobox-wrapper">
+        <div id="infobox-{{$index}}" ng-repeat="garden in gardens track by $index" class="infobox">
+          <div class="row">
+            <div class="batch"></div>
+            <div class="col-xs-12">
+              <h2 class="pull-left"><a ng-href="/gardens/{{garden.slug}}">{{garden.name}}</a></h2>
+              <i class="fa fa-user pull-right member-count">&nbsp;{{garden.members}}</i>
+              <div class="clearfix"></div>
+              <p>{{garden.address.street}}</p>
+              <p><strong>Chief Squirrel:</strong> <a href="/userProfile/25211485">{{garden.manager.name}}</a></p>
+              <p>
+                <strong>Description:</strong><br>
+                {{garden.description}}
+              </p>
+              <p><strong>Recent Update:</strong> <span>{{garden.lastUpdate | date:'dd.MM.yyyy'}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="gmap" gmap="startingLocation" markers="gardens" image-path="'img/'" class="map" location-pick="locationPick"></div>
+    </div>
+    <div class="col-xs-5 col-sm-4 col-md-3 no-gutter">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-5 col-sm-8 col-md-9">
+      <div class="row big-btns">
+        <div class="col-xs-4">
+          <button class="btn btn-white btn-block" type="button" ng-click="pickLocation()" ng-disabled="garden.address != null">
+            <i class="fa fa-map-marker fa-2x"></i><br>
+            <span ng-hide="garden.address != null">Add Location</span>
+            <span ng-show="garden.address != null">
+              <br>
+              {{garden.address.street}}<br>
+              {{garden.address.postal}}<br>
+              {{garden.address.city}}
+            </span>
+          </button>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-white btn-block" type="button" ng-disabled="garden.address == null">
+            <i class="fa fa-photo fa-2x"></i><br>
+            Upload Photo
+          </button>
+        </div>
+        <div class="col-xs-4">
+          <button class="btn btn-white btn-block" type="button" ng-disabled="garden.address == null">
+            <i class="fa fa-envelope fa-2x"></i><br>
+            Write a message
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="newGardenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">New Garden {{newGarden.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row margin-bottom-20">
+          <div class="col-xs-6">
+            <label><i class="fa fa-map-marker"></i> Address</label><br>
+            {{newGarden.address.street}}, {{newGarden.address.postal}}, {{newGarden.address.city}}<br><br>
+            <label>Name of the garden</label>
+            <input class="form-control" type="text" ng-model="newGarden.name">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <label>Choose an icon for your garden</label>
+            <div class="btn-group btn-group-justified icon-picker">
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="start"><i class="fa fa-bug fa-2x"></i></button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="tree"><i class="fa fa-heart fa-2x"></i></button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="FIELD"><i class="fa fa-sun-o fa-2x"></i></button>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="FIELD"><i class="fa fa-leaf fa-2x"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a class="abort" href="#" data-dismiss="modal">Abort</a>
+        <button type="button" class="btn btn-highlight" ng-click="close()" ng-disabled="loading">
+          <i class="fa fa-refresh fa-spin" ng-show="loading"></i>
+          <i class="fa fa-check" ng-hide="loading"></i>
+          &nbsp;Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -62,6 +62,29 @@ h3 {
   }
 }
 
+.btn-highlight {
+  background-color: @highlight1;
+  color: #fff;
+  -webkit-border-radius: @borderRadius;
+  border-radius: @borderRadius;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0,0,0,.05);
+  -webkit-transition: background-color .22s,border-color .22s,box-shadow .22s;
+  transition: background-color .22s,border-color .22s,box-shadow .22s;
+  outline: none;
+
+  &:visited,
+  &:active,
+  &:link {
+    color: #fff;
+  }
+
+  &:hover {
+    background-color: darken(@highlight1, 10%);
+    color: #fff;
+  }
+}
+
 .btn-white {
   height: 34px;
   padding: 5px;
@@ -110,7 +133,13 @@ h3 {
 }
 
 .grey {
-  color: #999;
+  color: #999 !important;
+}
+
+.abort {
+  color: #666 !important;
+  text-decoration: underline;
+  margin-right: 30px;
 }
 
 .profile-image {
@@ -129,6 +158,17 @@ h3 {
 .input-margin {
   input {
     margin-bottom: 8px;
+  }
+}
+
+.icon-picker {
+  .active {
+    background: @highlight1;
+    color: #fff;
+  }
+
+  .btn {
+    height: 90px;
   }
 }
 

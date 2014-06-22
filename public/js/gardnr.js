@@ -12,6 +12,7 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider
     .when('/map', {
       templateUrl: '/views/MapView.html',
+      reloadOnSearch: false,
       controller: 'MapCtrl'
     })
     .when('/profile/:userSlug', {
@@ -22,9 +23,12 @@ gardnrApp.config(['$routeProvider', function($routeProvider) {
       templateUrl: '/views/NewGardenView.html',
       controller: 'NewGardenCtrl'
     })
+    .when('/garden/map', {
+      templateUrl: '/views/GardenView.html',
+      controller: 'GardenCtrl'
+    })
     .otherwise('/map');
 }]);
-
 
 gardnrApp.controller('MapCtrl', [
   '$rootScope',
@@ -32,14 +36,12 @@ gardnrApp.controller('MapCtrl', [
   '$http',
   '$route',
   '$location',
+  '$timeout',
   'GeocodeService',
   'LocationPickService',
-  function ($rootScope, $scope, $http, $route, $location, GeocodeService, LocationPickService) {
-
-  $scope.locationPick = {
-    enabled: $route.current.params.pickloc,
-    location: []
-  }
+  'brainTreeService',
+  function ($rootScope, $scope, $http, $route, $location, $timeout,GeocodeService, LocationPickService, brainTreeService) {
+  $scope.loading = false;
 
   $scope.startingLocation = {
     lat: 52.513480,
@@ -52,36 +54,13 @@ gardnrApp.controller('MapCtrl', [
     street: 'Alexanderstr. 3'
   }
 
-  $rootScope.$on('locationPicked', function(event, data){
-    GeocodeService.getAddress(data[0], data[1], function(error, address){
-      if(error){
-        console.log(error);
-      } else {
-        var street = address.results[0].address_components[1].long_name + ' ' + address.results[0].address_components[0].long_name;
-        var city = "Berlin";
-        var postal = "10405";
-
-        for(var i = 0, len = address.results[0].address_components.length; i < len; i++){
-          if(address.results[0].address_components[i].types[0] == 'locality'){
-            city = address.results[0].address_components[i].long_name;
-          }
-
-          if(address.results[0].address_components[i].types[0] == 'postal_code'){
-            postal = address.results[0].address_components[i].long_name;
-          }
-        }
-
-        LocationPickService.setAddress(street, postal, city);
-        $location.path('/garden/new');
-      }
-    });
-  }, true);
-
-
   $scope.gardens = [
     {
       name: "Power Primeln",
-      manager: "Alexander Hansen",
+      manager: {
+        name: 'Maria Thien',
+        email: 'maria.thien@gmx.de'
+      },
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
@@ -98,7 +77,10 @@ gardnrApp.controller('MapCtrl', [
     },
     {
       name: "Power Primeln 2",
-      manager: "Alexander Hansen",
+      manager: {
+        name: 'Anna Sieners',
+        email: 'anna.sieners@gmail.com'
+      },
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
@@ -114,7 +96,10 @@ gardnrApp.controller('MapCtrl', [
     },
     {
       name: "Power Primeln 3",
-      manager: "Alexander Hansen",
+      manager: {
+        name: 'Alexander Hansen',
+        email: 'alex@hansens.com'
+      },
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
@@ -130,7 +115,76 @@ gardnrApp.controller('MapCtrl', [
     }
   ];
 
-  $scope.payment = function(amount) {
+  $scope.payment = brainTreeService.payment;
+
+  $scope.register = brainTreeService.register;
+
+}]);
+
+
+
+gardnrApp.directive('radio', function ($timeout) {
+  return {
+    restrict: 'A',
+    require: '?ngModel',
+    link: function ($scope, $element, $attributes, ngModel) {
+      var value = $attributes.radio;
+
+      $timeout(function () {
+        if (ngModel.$modelValue == value) {
+          $element.addClass('active');
+        }
+      });
+
+      $element.on('click', function () {
+        $('.btn-group .btn').each(function () {
+          $(this).removeClass('active');
+        });
+
+        $element.addClass('active');
+
+        if (ngModel) {
+          $scope.$apply(function () {
+            ngModel.$setViewValue(value);
+          });
+        }
+      });
+    }
+  }
+});
+'use strict';
+
+angular.module('gardnr-app')
+  .service('brainTreeService', ['$http', function ($http) {
+
+  var service = {};
+
+  service.register = function() {
+    console.log('registering');
+
+    var individual = {
+      firstName: "Jane",
+      lastName: "Doe",
+      email: "jane@14ladders.com",
+      phone: "5553334444",
+      dateOfBirth: "1981-11-19",
+      address: {
+        streetAddress: "111 Main St",
+        locality: "Chicago",
+        region: "IL",
+        postalCode: "60622"
+      }
+    };
+    $http.post('/registerSubMerchant', individual)
+    .success(function() {
+      console.log('successfully registered')
+    })
+    .error(function(err) {
+      console.log(err)
+    });
+  };
+
+  service.payment = function(amount) {
     console.log('payment: ', amount);
     $http.get('/payment/' + amount)
     .success(function() {
@@ -140,6 +194,8 @@ gardnrApp.controller('MapCtrl', [
       console.log(err)
     });
   };
+
+  return service;
 
 }]);
 
@@ -151,7 +207,6 @@ gardnrApp.controller('MapCtrl', [
 
 var garden = angular.module('garden', [
 ]);
-
 
 garden.controller('NewGardenCtrl', [
   '$scope',
@@ -180,15 +235,107 @@ garden.controller('NewGardenCtrl', [
     $scope.garden.address = $scope.pickedLocation;
   }
 
-
-
-
   $scope.pickLocation = function(){
     $location
-      .path('map')
+      .path('/garden/map')
       .search('pickloc');
   }
 }]);
+
+garden.controller('GardenCtrl', [
+  '$rootScope',
+  '$scope',
+  '$http',
+  '$route',
+  '$location',
+  '$timeout',
+  'GeocodeService',
+  'LocationPickService',
+  'brainTreeService',
+  function ($rootScope, $scope, $http, $route, $location, $timeout,GeocodeService, LocationPickService, brainTreeService) {
+    $scope.loading = false;
+
+    $scope.newGarden = {
+      name: "",
+      manager: {
+        name: 'Lisa Berg',
+        email: 'lisa.berg@gmail.com'
+      },
+      icon: '',
+      lastUpdate: '2014-06-22T14:30:00.000Z',
+      description: '',
+      slug: 'seed-camp',
+      members: 1,
+      distance: 0,
+      address: {
+        city: '',
+        postal: '',
+        street: '',
+        location: []
+      }
+    }
+
+    $scope.locationPick = {
+      enabled: $route.current.params.pickloc,
+      location: []
+    }
+
+    $scope.startingLocation = {
+      lat: 52.513480,
+      lng: 13.393530
+    }
+
+    $scope.user = {
+      firstname: 'Lisa',
+      lastname: 'Berg',
+      street: 'Alexanderstr. 3'
+    }
+
+    $rootScope.$on('locationPicked', function(event, data){
+      GeocodeService.getAddress(data[0], data[1], function(error, address){
+        if(error){
+          console.log(error);
+        } else {
+          var street = address.results[0].address_components[1].long_name + ' ' + address.results[0].address_components[0].long_name;
+          var city = "Berlin";
+          var postal = "10405";
+
+          for(var i = 0, len = address.results[0].address_components.length; i < len; i++){
+            if(address.results[0].address_components[i].types[0] == 'locality'){
+              city = address.results[0].address_components[i].long_name;
+            }
+
+            if(address.results[0].address_components[i].types[0] == 'postal_code'){
+              postal = address.results[0].address_components[i].long_name;
+            }
+          }
+
+          LocationPickService.setAddress(street, postal, city);
+
+          $scope.newGarden.address = {
+            city: city,
+            postal: postal,
+            street: street,
+            location: [data[0], data[1]]
+          }
+
+          // nasty hack, normally that should be go into a directve and service
+          $('#newGardenModal').modal('show');
+        }
+      });
+    }, true);
+
+   $scope.close = function(){
+      $scope.loading = true;
+
+      $timeout(function(){
+        $scope.loading = false;
+        $('#newGardenModal').modal('hide');
+        $scope.locationPick.enabled = false;
+        $location.search('pickloc', null);
+      }, 600);
+    }
+  }]);
 
 garden.factory('LocationPickService', function () {
   var _street;
@@ -329,9 +476,7 @@ angular.module('geo', [])
                 if($scope.markers.length > 0){
                   for(var i = 0; i < $scope.markers.length; i++){
                     // check if only limit has changed (show more button was clicked)
-                    if(newValue[i].limit == oldValue[i].limit && newValue[i].slots == oldValue[i].slots){
-                      addMarker(i, $scope.markers[i].address.location[1], $scope.markers[i].address.location[0]);
-                    }
+                    addMarker(i, $scope.markers[i].address.location[1], $scope.markers[i].address.location[0]);
                   }
 
                   // zoom map to fitt all markers

@@ -21,7 +21,7 @@
             <label class="checkbox">
               <input type="checkbox" value="remember-me"> Remember me
             </label>
-            <button class="btn btn-primary btn-block" type="button" ng-click="login()">
+            <button class="btn btn-highlight btn-block" type="button" ng-click="login()" ng-disabled="loading">
               Sign in
               <i class="fa fa-refresh fa-spin" ng-show="loading"></i>
             </button>

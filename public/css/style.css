@@ -44,9 +44,6 @@
 .login input {
   margin-bottom: 5px;
 }
-.big-btns {
-  margin-top: 150px;
-}
 .big-btns .btn-white {
   height: 130px;
   font-size: 15px;
@@ -101,6 +98,26 @@ h3 {
   font-size: 11px;
   line-height: 15px;
 }
+.btn-highlight {
+  background-color: #8dc63f;
+  color: #fff;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  cursor: pointer;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  -webkit-transition: background-color 0.22s, border-color 0.22s, box-shadow 0.22s;
+  transition: background-color 0.22s, border-color 0.22s, box-shadow 0.22s;
+  outline: none;
+}
+.btn-highlight:visited,
+.btn-highlight:active,
+.btn-highlight:link {
+  color: #fff;
+}
+.btn-highlight:hover {
+  background-color: #72a230;
+  color: #fff;
+}
 .btn-white {
   height: 34px;
   padding: 5px;
@@ -142,7 +159,12 @@ h3 {
   padding-right: 0;
 }
 .grey {
-  color: #999;
+  color: #999 !important;
+}
+.abort {
+  color: #666 !important;
+  text-decoration: underline;
+  margin-right: 30px;
 }
 .profile-image {
   width: 150px;
@@ -156,4 +178,11 @@ h3 {
 }
 .input-margin input {
   margin-bottom: 8px;
+}
+.icon-picker .active {
+  background: #8dc63f;
+  color: #fff;
+}
+.icon-picker .btn {
+  height: 90px;
 }
