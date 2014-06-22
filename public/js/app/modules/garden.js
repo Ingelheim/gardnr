@@ -179,7 +179,8 @@ garden.factory('GardenModel', function () {
       name: "Power Primeln",
       manager: {
         name: 'Maria Thien',
-        email: 'maria.thien@gmx.de'
+        email: 'maria.thien@gmx.de',
+        merchantId: 'maria_thien_instant_8sznz223'
       },
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
@@ -199,7 +200,8 @@ garden.factory('GardenModel', function () {
       name: "Power Primeln 2",
       manager: {
         name: 'Anna Sieners',
-        email: 'anna.sieners@gmail.com'
+        email: 'anna.sieners@gmail.com',
+        merchantId: 'maria_thien_instant_8sznz223'
       },
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',
@@ -218,7 +220,8 @@ garden.factory('GardenModel', function () {
       name: "Power Primeln 3",
       manager: {
         name: 'Alexander Hansen',
-        email: 'alex@hansens.com'
+        email: 'alex@hansens.com',
+        merchantId: 'maria_thien_instant_8sznz223'
       },
       icon: 'flower',
       lastUpdate: '2014-06-20T23:00:00.000Z',

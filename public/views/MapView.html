@@ -69,7 +69,7 @@
       <div id="gmap" gmap="startingLocation" markers="gardens" image-path="'img/'" class="map"></div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" ng-if="selectedGarden">
     <div class="col-xs-8">
       <div class="row">
         <div class="col-xs-12">
@@ -188,10 +188,9 @@
       </div>
       <div class="modal-footer">
         <a class="abort" href="#" data-dismiss="modal">Abort</a>
-        <button type="button" class="btn btn-highlight" ng-click="doDonation()" ng-disabled="loading">
+        <button type="button" class="btn btn-highlight" ng-click="doDonation(amount, selectedGarden.manager.merchantId)" ng-disabled="loading">
           <i class="fa fa-refresh fa-spin" ng-show="loading"></i>
-          <i class="fa fa-dollar" ng-hide="loading"></i>
-          &nbsp;Donate
+          &nbsp;Donate ${{amount}}
         </button>
       </div>
     </div>
