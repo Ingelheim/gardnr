@@ -47,6 +47,7 @@ gardnrApp.controller('MapCtrl', [
   function ($rootScope, $scope, $http, $route, $location, $timeout, GeocodeService, LocationPickService, brainTreeService, GardenModel) {
   $scope.loading = false;
   $scope.gardens = GardenModel.getAll();
+  $scope.selectedGarden = null;
 
   $scope.locationPick = {
     enabled: $route.current.params.pickloc,
@@ -56,6 +57,14 @@ gardnrApp.controller('MapCtrl', [
   $scope.startingLocation = {
     lat: 52.513480,
     lng: 13.393530
+  }
+
+  $scope.select = function(garden){
+    $scope.selectedGarden = garden;
+    $scope.startingLocation = {
+      lat: garden.address.location[1],
+      lng: garden.address.location[0]
+    }
   }
 
   $scope.user = {

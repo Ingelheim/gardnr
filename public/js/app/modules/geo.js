@@ -140,7 +140,7 @@ angular.module('geo', [])
           $scope.$watch('gmap', function(){
             if($scope.gmap && $scope.gmap.lat && $scope.gmap.lng){
               // remove all markers
-              $scope.clear();
+              //$scope.clear();
 
               // change center of map
               map.setCenter(new google.maps.LatLng($scope.gmap.lat, $scope.gmap.lng));

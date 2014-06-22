@@ -38,6 +38,14 @@
 .garden-item {
   height: 100px;
 }
+.garden-item.active {
+  background-color: #45a498;
+  color: #fff;
+}
+.garden-item.active:hover {
+  background-color: #45a498;
+  color: #fff;
+}
 .login {
   margin-top: 200px;
 }
