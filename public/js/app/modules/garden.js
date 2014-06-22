@@ -55,7 +55,7 @@ garden.controller('GardenCtrl', [
     $scope.gardens = [];
 
     $scope.newGarden = {
-      name: "",
+      name: "New Garden",
       manager: {
         name: 'Lisa Berg',
         email: 'lisa.berg@gmail.com'
@@ -72,6 +72,13 @@ garden.controller('GardenCtrl', [
         street: '',
         location: []
       }
+    }
+
+    $scope.getClass = function(icon){
+      var css = {};
+
+      css[icon] = true;
+      return css;
     }
 
     $scope.locationPick = {
@@ -182,7 +189,7 @@ garden.factory('GardenModel', function () {
         email: 'maria.thien@gmx.de',
         merchantId: 'maria_thien_instant_8sznz223'
       },
-      icon: 'flower',
+      icon: 'fa-heart',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln',
@@ -197,14 +204,14 @@ garden.factory('GardenModel', function () {
       }
     },
     {
-      name: "Power Primeln 2",
+      name: "Super Sunflowers",
       manager: {
         name: 'Anna Sieners',
         email: 'anna.sieners@gmail.com',
         merchantId: 'maria_thien_instant_8sznz223'
       },
-      icon: 'flower',
-      lastUpdate: '2014-06-20T23:00:00.000Z',
+      icon: 'fa-bug',
+      lastUpdate: '2014-06-19T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln2',
       members: 3,
@@ -217,13 +224,13 @@ garden.factory('GardenModel', function () {
       }
     },
     {
-      name: "Power Primeln 3",
+      name: "Flower Power Prenzlberg",
       manager: {
-        name: 'Alexander Hansen',
+        name: 'Ingo Hoffmann',
         email: 'alex@hansens.com',
         merchantId: 'maria_thien_instant_8sznz223'
       },
-      icon: 'flower',
+      icon: 'fa-leaf',
       lastUpdate: '2014-06-20T23:00:00.000Z',
       description: 'LOrem Ipsum dolor bla',
       slug: 'power-primeln',

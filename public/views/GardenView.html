@@ -1,14 +1,21 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-5 col-sm-4 col-md-2 no-gutter">
-      <i class="fa" ng-class="getClass(newGarden.icon)"></i>
+  <div class="row" style="min-height: 130px">
+    <div class="col-xs-5 col-sm-4 col-md-1 no-gutter">
+      <div class="img-thumbnail icon" ng-if="newGarden.icon">
+        <i class="fa fa-5x" ng-class="getClass(newGarden.icon)"></i>
+      </div>
     </div>
-    <div class="col-xs-7 col-sm-8 col-md-10 no-gutter">
-      <h1>{{newGarden.name}}</h1>
-      <p>
-        {{newGarden.address.street}}<br>
-        {{newGarden.address.postal}} {{newGarden.address.city}}
-      </p>
+    <div class="col-xs-7 col-sm-8 col-md-5 no-gutter">
+      <div class="alert alert-info" ng-show="newGarden.address.location.length == 0" style="margin-top: 30px">
+        <i class="fa fa-info-circle"></i> Pick an address on the map below.
+      </div>
+      <div ng-show="newGarden.address.location.length > 0">
+        <h1>{{newGarden.name}}</h1>
+        <p>
+          {{newGarden.address.street}}<br>
+          {{newGarden.address.postal}} {{newGarden.address.city}}
+        </p>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -109,16 +116,16 @@
             <label>Choose an icon for your garden</label>
             <div class="btn-group btn-group-justified icon-picker">
               <div class="btn-group">
-                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="start"><i class="fa fa-bug fa-2x"></i></button>
+                <button type="button" class="btn btn-white" ng-model="newGarden.icon" radio="fa-bug"><i class="fa fa-bug fa-2x"></i></button>
               </div>
               <div class="btn-group">
-                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="tree"><i class="fa fa-heart fa-2x"></i></button>
+                <button type="button" class="btn btn-white" ng-model="newGarden.icon" radio="fa-heart"><i class="fa fa-heart fa-2x"></i></button>
               </div>
               <div class="btn-group">
-                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="FIELD"><i class="fa fa-sun-o fa-2x"></i></button>
+                <button type="button" class="btn btn-white" ng-model="newGarden.icon" radio="fa-sun-o"><i class="fa fa-sun-o fa-2x"></i></button>
               </div>
               <div class="btn-group">
-                <button type="button" class="btn btn-white" ng-model="newGarten.icon" radio="FIELD"><i class="fa fa-leaf fa-2x"></i></button>
+                <button type="button" class="btn btn-white" ng-model="newGarden.icon" radio="fa-leaf"><i class="fa fa-leaf fa-2x"></i></button>
               </div>
             </div>
           </div>

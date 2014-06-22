@@ -285,8 +285,9 @@ angular.module('geo', [])
 
           if($scope.locationPick && $scope.locationPick.enabled){
             google.maps.event.addListener(map, 'click', function(event) {
-              console.log(event.latLng);
-              $rootScope.$emit('locationPicked', [event.latLng.A, event.latLng.k]);
+              $scope.$apply(function(){
+                $rootScope.$emit('locationPicked', [event.latLng.A, event.latLng.k]);
+              });
             });
           }
         }

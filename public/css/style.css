@@ -57,6 +57,10 @@
   font-size: 15px;
   font-weight: bold;
 }
+.icon {
+  margin: 20px;
+  color: #45a498;
+}
 body {
   overflow-y: scroll;
   font-family: 'Open Sans', sans-serif;

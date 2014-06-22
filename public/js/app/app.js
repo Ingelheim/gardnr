@@ -67,6 +67,15 @@ gardnrApp.controller('MapCtrl', [
     }
   }
 
+  $scope.getClass = function(icon){
+    var css = {};
+
+    console.log(icon);
+
+    css[icon] = true;
+    return css;
+  }
+
   $scope.user = {
     firstname: 'Lisa',
     lastname: 'Berg',
